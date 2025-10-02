@@ -13,14 +13,6 @@ An intelligent AI career assistant that analyzes your current skills and provide
 - **Real-time Web Search** - DuckDuckGo integration for current resources
 - **AI-powered Recommendations** - Groq LLM for intelligent career advice
 - **MCP Protocol** - Distributed microservice architecture
-- **100% Free** - No API costs, runs entirely on free tiers
-- **Demo Ready** - Professional web interface included
-
-## Quick Start
-
-### Prerequisites
-- Python 3.11+
-- Groq API Key (free at [console.groq.com](https://console.groq.com/keys))
 
 ### Installation
 
@@ -130,4 +122,5 @@ HOST=0.0.0.0
 - **Skills Database**: Edit `local_rag.py` to add your own skill sets
 - **MCP Servers**: Modify `mcp/rag_mcp_stdio.py` and `mcp/search_mcp_stdio.py`
 - **AI Model**: Change `GROQ_MODEL` in `client/client_agent.py`
+
 
