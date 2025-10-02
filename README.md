@@ -7,8 +7,6 @@
 
 An intelligent AI career assistant that analyzes your current skills and provides personalized career development advice. Built with **FastAPI**, **Groq AI**, and **MCP Protocol** for a modern, distributed microservices architecture.
 
-**Perfect for AI Software Engineer portfolios** - Demonstrates RAG, LLM integration, and modern MCP architecture patterns.
-
 ## Features
 
 - **RAG-powered CV Analysis** - Local skill extraction and analysis
@@ -132,3 +130,4 @@ HOST=0.0.0.0
 - **Skills Database**: Edit `local_rag.py` to add your own skill sets
 - **MCP Servers**: Modify `mcp/rag_mcp_stdio.py` and `mcp/search_mcp_stdio.py`
 - **AI Model**: Change `GROQ_MODEL` in `client/client_agent.py`
+
