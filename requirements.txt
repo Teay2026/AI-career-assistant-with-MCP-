@@ -1,0 +1,11 @@
+openai
+tiktoken
+python-dotenv
+requests
+mcp
+httpx
+uvicorn
+fastapi
+groq
+duckduckgo-search
+pydantic

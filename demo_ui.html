@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Skill Assistant AI - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .typing-indicator { animation: typing 1.5s infinite; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        .message-enter { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 10px; }
+        .chat-scroll::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white p-6 shadow-lg">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">Skill Assistant AI</h1>
+                        <p class="text-white/80">Intelligent Career Development Assistant</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="bg-green-500 px-3 py-1 rounded-full text-sm flex items-center">
+                        <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+                        Online
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Sidebar - Demo Information -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Features Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-star text-yellow-500 mr-2"></i>
+                        Features
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>RAG-powered CV analysis</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>Real-time web search</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>AI-powered recommendations</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>MCP Protocol integration</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>100% Free & Open Source</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Examples -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-lightbulb text-blue-500 mr-2"></i>
+                        Try These Questions
+                    </h3>
+                    <div class="space-y-2">
+                        <button onclick="askQuestion('What programming skills do I have?')"
+                                class="w-full text-left p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors text-sm">
+                            📊 What programming skills do I have?
+                        </button>
+                        <button onclick="askQuestion('How can I become a data scientist?')"
+                                class="w-full text-left p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors text-sm">
+                            🧠 How can I become a data scientist?
+                        </button>
+                        <button onclick="askQuestion('What cloud computing skills should I learn?')"
+                                class="w-full text-left p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors text-sm">
+                            ☁️ What cloud computing skills should I learn?
+                        </button>
+                        <button onclick="askQuestion('How do I improve my machine learning expertise?')"
+                                class="w-full text-left p-3 rounded-lg bg-orange-50 hover:bg-orange-100 transition-colors text-sm">
+                            🤖 How do I improve my ML expertise?
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-code text-purple-500 mr-2"></i>
+                        Tech Stack
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-blue-100 text-blue-800 px-2 py-1 rounded">FastAPI</div>
+                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded">Groq AI</div>
+                        <div class="bg-purple-100 text-purple-800 px-2 py-1 rounded">MCP Protocol</div>
+                        <div class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">RAG</div>
+                        <div class="bg-red-100 text-red-800 px-2 py-1 rounded">DuckDuckGo</div>
+                        <div class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Python</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden h-[600px] flex flex-col">
+                    <!-- Chat Header -->
+                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold">AI Career Assistant</h3>
+                                    <p class="text-sm text-white/80">Powered by Groq & MCP</p>
+                                </div>
+                            </div>
+                            <button onclick="clearChat()" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg text-sm transition-colors">
+                                Clear Chat
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="chatContainer" class="flex-1 overflow-y-auto chat-scroll p-4 space-y-4">
+                        <div class="flex items-start space-x-3 message-enter">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                                <p class="text-sm text-gray-800">👋 Welcome! I'm your AI Career Assistant. I can help you:</p>
+                                <ul class="text-xs text-gray-600 mt-2 space-y-1">
+                                    <li>• Analyze your current skills</li>
+                                    <li>• Suggest career development paths</li>
+                                    <li>• Find learning resources</li>
+                                    <li>• Provide personalized advice</li>
+                                </ul>
+                                <p class="text-sm text-gray-800 mt-2">What would you like to know?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div id="loadingIndicator" class="hidden p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3">
+                                <div class="flex items-center space-x-2">
+                                    <div class="typing-indicator w-2 h-2 bg-gray-400 rounded-full"></div>
+                                    <div class="typing-indicator w-2 h-2 bg-gray-400 rounded-full" style="animation-delay: 0.3s;"></div>
+                                    <div class="typing-indicator w-2 h-2 bg-gray-400 rounded-full" style="animation-delay: 0.6s;"></div>
+                                    <span class="text-sm text-gray-600 ml-2">AI is thinking...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="border-t p-4">
+                        <div class="flex space-x-3">
+                            <input type="text"
+                                   id="questionInput"
+                                   placeholder="Ask about your skills, career goals, or learning paths..."
+                                   class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   onkeypress="handleKeyPress(event)">
+                            <button onclick="sendQuestion()"
+                                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center space-x-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-400">🤖 Built with <span class="text-red-500">❤️</span> using FastAPI, Groq AI, and MCP Protocol</p>
+            <p class="text-sm text-gray-500 mt-2">Perfect for AI Software Engineer portfolios • 100% Free & Open Source</p>
+        </div>
+    </footer>
+
+    <script>
+        const conversationId = 'demo_' + Date.now();
+        let messageCount = 0;
+
+        async function sendQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value.trim();
+            if (!question) return;
+
+            // Add user message
+            addMessage('user', question);
+            input.value = '';
+
+            // Show loading
+            showLoading(true);
+
+            try {
+                const response = await fetch('http://localhost:7081/api/agtchat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        Question: question,
+                        conversation_id: conversationId
+                    })
+                });
+
+                const data = await response.json();
+
+                // Hide loading
+                showLoading(false);
+
+                // Add AI response
+                addMessage('assistant', data.answer || 'Sorry, I encountered an error. Please try again.');
+
+            } catch (error) {
+                showLoading(false);
+                addMessage('assistant', '⚠️ Connection error: Make sure the server is running on http://localhost:7081');
+            }
+        }
+
+        function addMessage(role, content) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 message-enter';
+
+            const isUser = role === 'user';
+            const alignment = isUser ? 'justify-end' : '';
+            const bgColor = isUser ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' : 'bg-gray-100';
+            const textColor = isUser ? 'text-white' : 'text-gray-800';
+            const avatar = isUser
+                ? '<div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-sm"><i class="fas fa-user"></i></div>'
+                : '<div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm"><i class="fas fa-robot"></i></div>';
+
+            messageDiv.innerHTML = `
+                <div class="w-full flex ${alignment}">
+                    ${!isUser ? avatar : ''}
+                    <div class="${bgColor} rounded-lg p-3 max-w-lg ${isUser ? 'order-first' : ''}">
+                        <p class="text-sm ${textColor} whitespace-pre-wrap">${formatMessage(content)}</p>
+                    </div>
+                    ${isUser ? avatar : ''}
+                </div>
+            `;
+
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+            messageCount++;
+        }
+
+        function formatMessage(content) {
+            // Simple formatting for better readability
+            return content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n\n/g, '</p><p class="mt-2">')
+                .replace(/\n/g, '<br>');
+        }
+
+        function showLoading(show) {
+            const indicator = document.getElementById('loadingIndicator');
+            const container = document.getElementById('chatContainer');
+
+            if (show) {
+                indicator.classList.remove('hidden');
+                container.scrollTop = container.scrollHeight;
+            } else {
+                indicator.classList.add('hidden');
+            }
+        }
+
+        function askQuestion(question) {
+            document.getElementById('questionInput').value = question;
+            sendQuestion();
+        }
+
+        function clearChat() {
+            const container = document.getElementById('chatContainer');
+            container.innerHTML = `
+                <div class="flex items-start space-x-3 message-enter">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                        <p class="text-sm text-gray-800">Chat cleared! How can I help you today?</p>
+                    </div>
+                </div>
+            `;
+            messageCount = 0;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendQuestion();
+            }
+        }
+
+        // Auto-focus input on load
+        window.addEventListener('load', () => {
+            document.getElementById('questionInput').focus();
+        });
+    </script>
+</body>
+</html>
